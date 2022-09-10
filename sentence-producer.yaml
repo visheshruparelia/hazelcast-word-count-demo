@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentence-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sentence-kafka-producer
+  template:
+    metadata:
+      labels:
+        app: sentence-kafka-producer
+    spec:
+      containers:
+        - name: sentence-producer
+          image: "itsvishesh/sentence-producer:latest"

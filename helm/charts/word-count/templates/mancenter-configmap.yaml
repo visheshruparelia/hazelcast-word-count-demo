@@ -1,0 +1,10 @@
+{{- if .Values.mancenter.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "mancenter.fullname" . }}-configmap
+  namespace: {{ .Release.Namespace | quote }}
+data:
+  hazelcast-client.yaml: |-
+{{ tpl (.Files.Get "config-files/hazelcast-client.yaml.tpl") . | indent 4 }}
+{{- end }}

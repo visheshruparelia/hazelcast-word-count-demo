@@ -14,9 +14,6 @@ import com.hazelcast.jet.core.metrics.Measurement;
 import com.hazelcast.jet.core.metrics.MetricTags;
 import com.hazelcast.jet.pipeline.Pipeline;
 
-import java.nio.channels.Pipe;
-import java.util.stream.Stream;
-
 public class App {
 
     public static void main(String[] args) throws InterruptedException {

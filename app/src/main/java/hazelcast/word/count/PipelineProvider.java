@@ -6,10 +6,7 @@ import com.hazelcast.jet.kafka.impl.StreamKafkaP;
 import com.hazelcast.jet.pipeline.Pipeline;
 import com.hazelcast.jet.pipeline.Sinks;
 import com.hazelcast.jet.pipeline.StreamSource;
-import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.common.config.SaslConfigs;
-import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.util.Arrays;
@@ -35,7 +32,7 @@ public class PipelineProvider {
         pipeline.readFrom(kafkaSource) // We read from a Kafka topic
                 .withoutTimestamps()
                 // We use map transform and pass a function which counts the number of words.
-                .map(sentence -> sentence.split(" ").length)
+                .map(sentence -> sentence.split(" ").length).setLocalParallelism(2)
                 // The output of the resulting map will be logged.
                 .writeTo(Sinks.logger());
 
